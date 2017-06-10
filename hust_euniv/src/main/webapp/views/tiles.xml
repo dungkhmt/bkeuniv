@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="layout" template="/views/layout/base.jsp">           
+    	<put-attribute name="header" value="/views/layout/widget/header.jsp" />
+    	<put-attribute name="footer" value="/views/layout/widget/footer.jsp" />            
+    </definition>    
+    
+    <!-- Auth -->
+    <definition name="signin" template="/views/usermanagement/auth/signin.jsp">
+    	<put-attribute name="title" value="Sign in" />		    	    	                
+    </definition>
+     <definition name="register" extends="layout">
+    	<put-attribute name="title" value="Register" />    	                
+    	<put-attribute name="content" value="/views/usermanagement/auth/register.jsp"/>
+    </definition>
+    <definition name="denied" extends="layout">
+    	<put-attribute name="title" value="Access Denied" />
+    	<put-attribute name="content" value="/views/usermanagement/auth/denied.jsp" />                
+    </definition>
+    
+    <!-- Miscellaneous -->
+    <definition name="home" extends="layout">
+    	<put-attribute name="title" value="Homepage" />
+    	<put-attribute name="content" value="/views/home.jsp" />                
+    </definition>   
+    
+    <definition name="redirect" extends="layout">
+    	<put-attribute name="title" value="Redirect" />    	                
+    	<put-attribute name="content" value="/views/miscellaneous/redirect.jsp" />
+    </definition>          
+    
+    <!-- Error -->    
+    <definition name="layout.errorBase" template="/views/layout/errorBase.jsp">           
+    </definition>  
+    
+    <!-- 404 -->
+    <definition name="cp.Error" extends="layout.errorBase">
+        <put-attribute name="title" value="" />                                 
+        <put-attribute name="content" value="/views/layout/widget/error.jsp" />
+    </definition>
+
+    <definition name="cp.notFound404" extends="layout.errorBase">
+        <put-attribute name="title" value="404 Not found." />                                 
+        <put-attribute name="content" value="/views/miscellaneous/404.jsp" />
+    </definition>
+    
+    <definition name="cp.400" extends="layout.errorBase">
+        <put-attribute name="title" value="404 Not found." />                                 
+        <put-attribute name="content" value="/views/miscellaneous/400.jsp" />
+    </definition>
+    
+    <!-- 500 -->
+    <definition name="cp.500" extends="layout.errorBase">
+        <put-attribute name="title" value="500 Internal Server Error." />                                 
+        <put-attribute name="content" value="/views/miscellaneous/500.jsp" />
+    </definition>
+    
+    <!-- ResearchDeclaration -->
+	<!-- Papers Module -->
+    <definition name="rd.papers.list" extends="layout">
+        <put-attribute name="title" value="Show list papers" />                                 
+        <put-attribute name="content" value="/views/researchdeclaration/papers/list.jsp" />
+    </definition>
+    
+    <definition name="rd.addAPaper" extends="layout">
+        <put-attribute name="title" value="Create a paper" />                                 
+        <put-attribute name="content" value="/views/researchdeclaration/papers/add.jsp" />
+    </definition>
+    
+    <definition name="rd.generate" extends="layout">
+        <put-attribute name="title" value="Create a paper" />                                 
+        <put-attribute name="content" value="/views/researchdeclaration/papers/generate.jsp" />
+    </definition>
+    
+    <definition name="rd.editAPaper" extends="layout">
+        <put-attribute name="title" value="Edit a paper" />                                 
+        <put-attribute name="content" value="/views/researchdeclaration/papers/edit.jsp" />
+    </definition>
+    
+    <definition name="rd.summaryPaper" extends="layout">
+        <put-attribute name="title" value="Show list projects" />                                 
+        <put-attribute name="content" value="/views/researchdeclaration/papers/papers-summary-filters.jsp" />
+    </definition>
+    
+    <definition name="rd.listPapersSummary" extends="layout">
+        <put-attribute name="title" value="Show list papers" />                                 
+        <put-attribute name="content" value="/views/researchdeclaration/papers/list-papers-summary.jsp" />
+    </definition>
+    
+     
+</tiles-definitions>
