@@ -6,11 +6,16 @@
 
 package vn.webapp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import vn.webapp.modules.usermanagement.model.Function;
 
 public class BaseWeb {
 
@@ -24,7 +29,7 @@ public class BaseWeb {
 	}
     
     @ModelAttribute
-    public void addGlobalAttr(ModelMap map) {
+    public void addGlobalAttr(ModelMap map, HttpSession session) {
         if(request.getRequestURI().equals("/")){
         	baseUrl = request.getRequestURL().substring(0, request.getRequestURL().length() - 1).toString();
         }else if(request.getRequestURI().equals("")){
@@ -36,5 +41,13 @@ public class BaseWeb {
         assetsUrl = baseUrl + "/assets";
         map.put("baseUrl", baseUrl);
         map.put("assetsUrl", assetsUrl);
+        
+        if(session.getAttribute("funcsParentsList") != null){
+        	List<Function> funcsChildrenList = (List<Function>)session.getAttribute("funcsChildrenList");
+        	List<Function> funcsParentsList = (List<Function>)session.getAttribute("funcsParentList");
+        	map.put("funcsChildrenList", funcsChildrenList);        	
+        	map.put("funcsParentsList", funcsParentsList);
+        	
+        }
     }
 }

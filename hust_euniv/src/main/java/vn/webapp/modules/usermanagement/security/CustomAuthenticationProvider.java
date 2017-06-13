@@ -7,6 +7,7 @@
 package vn.webapp.modules.usermanagement.security;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import vn.webapp.modules.usermanagement.model.Function;
 import vn.webapp.modules.usermanagement.model.User;
+import vn.webapp.modules.usermanagement.service.FunctionService;
 import vn.webapp.modules.usermanagement.service.UserService;
 
 
@@ -27,14 +30,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	private UserService userService;	
-
+	
+	@Autowired
+	private FunctionService functionService;	
+	
 	@Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {  
         
-		System.out.println("authen OK");
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        System.out.println(username + " " + password);
        
         if ("".equals(username)) {
             throw new BadCredentialsException("You must fill in username");
@@ -56,8 +60,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Wrong password");
         }
         
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+        List<Function> functionsOfUsers = functionService.loadFunctionsChildHierachyList(user.getUser_Code());
+        //Every user has at least one function role will the permission to access to the homepage
+        if(functionsOfUsers.size() > 0){
+        	Function homeAccess = new Function();
+	        homeAccess.setAuthority("HOME_ACCESS");
+	        functionsOfUsers.add(homeAccess);
+        }        
+        Collection<? extends GrantedAuthority> authorities = functionsOfUsers;
         System.out.println(authorities.size());
+        
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
 

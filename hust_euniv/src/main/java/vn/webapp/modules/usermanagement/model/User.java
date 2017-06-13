@@ -25,11 +25,17 @@ public class User implements Serializable{
 	private String Password;	
 	private String User_Code;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)  
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Role.class)  
     @JoinTable(name="tbluserroles", 
     		   joinColumns=@JoinColumn(name="Username", referencedColumnName = "Username"), 
     		   inverseJoinColumns=@JoinColumn(name="Role", referencedColumnName = "ROLE_CODE")) 
 	private Set<Role> roles = new HashSet<Role>();
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Function.class)  
+    @JoinTable(name="tbluserfunctions", 
+    		   joinColumns=@JoinColumn(name="USERFUNC_USERCODE", referencedColumnName = "User_Code"), 
+    		   inverseJoinColumns=@JoinColumn(name="USERFUNC_FUNCCODE", referencedColumnName = "FUNC_CODE")) 
+	private Set<Function> functions = new HashSet<Function>();
 		
 	public User(){		
 	}
@@ -38,9 +44,7 @@ public class User implements Serializable{
 		this.Username = username;
 		this.Password = password;
 		this.setAuthorities(roles);
-	}	
-		
-	
+	}		
 
 	public int getUser_ID() {
 		return User_ID;
@@ -88,6 +92,14 @@ public class User implements Serializable{
 
 	public void setUser_Code(String user_Code) {
 		User_Code = user_Code;
+	}
+
+	public Set<Function> getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(Set<Function> functions) {
+		this.functions = functions;
 	}	
 	
 }

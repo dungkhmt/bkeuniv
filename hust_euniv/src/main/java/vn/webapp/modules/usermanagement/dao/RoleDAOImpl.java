@@ -54,5 +54,22 @@ public class RoleDAOImpl implements RoleDAO{
 		}		
 	}
 	
+	public List<Role> getByUser(String Username){
+		
+		try {
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Role.class, "role");         	
+         	criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+         	.createAlias("role.users", "users")
+         	.add(Restrictions.eq("users.Username", Username));
+         	         	
+            List<Role> roles = criteria.list();            
+            return roles;
+         } catch (HibernateException e) {
+         	logger.error(e.getMessage());
+         	return null;
+         }
+		
+	}
+	
 	
 }

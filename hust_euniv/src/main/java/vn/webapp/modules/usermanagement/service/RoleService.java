@@ -8,5 +8,6 @@ public interface RoleService {
 	
 	public List<Role> getList();
 	public Role getByName(String name);
+	public List<Role> getByUser(String Username);
 
 }

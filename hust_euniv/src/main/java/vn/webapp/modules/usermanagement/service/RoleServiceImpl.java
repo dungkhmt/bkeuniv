@@ -30,5 +30,11 @@ public class RoleServiceImpl implements RoleService {
 	public Role getByName(String name){
 		return roleDAO.getByName(name);
 	}
+	
+	@Override
+	@Transactional	
+	public List<Role> getByUser(String Username){
+		return roleDAO.getByUser(Username);	
+	}
 
 }

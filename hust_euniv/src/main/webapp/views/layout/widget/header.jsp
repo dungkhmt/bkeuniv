@@ -40,38 +40,35 @@
 	<div class="navbar-default sidebar" id="sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-            	<!--<c:forEach items="${funcsParentsList}" var="showedParentPermission">
-            		<c:if test="${showedParentPermission.SELECTED == 1}">	
-		                <li>
-		                	<a class="${showedParentPermission.FUNC_SELECTED_CLASS}" href="<c:url value="${baseUrl}${showedParentPermission.FUNC_URL}"/>"><i class="${showedParentPermission.FUNC_TITLE_CLASS}"></i> ${showedParentPermission.FUNC_NAME} <c:if test="${showedParentPermission.FUNC_HAS_CHILDREN == 1}"><span class="fa arrow"></span></c:if></a>
-		                	<c:if test="${showedParentPermission.FUNC_HAS_CHILDREN == 1}">
-		                	<ul class="nav nav-second-level">
-		                	<c:forEach items="${funcsChildrenList}" var="showedChildrenPermission">
-		                		<c:if test="${showedChildrenPermission.FUNC_PARENTID == showedParentPermission.FUNC_ID}">
-		                			<c:if test="${showedChildrenPermission.SELECTED == 1}">
-			                			<li>
-											<a class="${showedChildrenPermission.FUNC_SELECTED_CLASS}" href="<c:url value="${baseUrl}${showedChildrenPermission.FUNC_URL}"/>"><i class="${showedChildrenPermission.FUNC_TITLE_CLASS}"></i> ${showedChildrenPermission.FUNC_NAME}</a>
-										</li>
-									</c:if>									                	
-			                    </c:if>
-		                	</c:forEach>
-		                	</ul>
-		                	</c:if>
-		                </li>
-	                </c:if>
-                </c:forEach>-->
+            	<c:forEach items="${funcsParentsList}" var="showedParentPermission">
+           		    <li>
+	                	<a class="${showedParentPermission.FUNC_SELECTED_CLASS}" href="<c:url value="${baseUrl}${showedParentPermission.FUNC_URL}"/>"><i class="${showedParentPermission.FUNC_TITLE_CLASS}"></i> ${showedParentPermission.FUNC_NAME} <c:if test="${showedParentPermission.FUNC_HAS_CHILDREN == 1}"><span class="fa arrow"></span></c:if></a>
+	                	<c:if test="${showedParentPermission.FUNC_HAS_CHILDREN == 1}">
+	                	<ul class="nav nav-second-level">
+	                	<c:forEach items="${funcsChildrenList}" var="showedChildrenPermission">
+	                		<c:if test="${showedChildrenPermission.FUNC_PARENTID == showedParentPermission.FUNC_ID}">
+	                			<li>
+									<a class="${showedChildrenPermission.FUNC_SELECTED_CLASS}" href="<c:url value="${baseUrl}${showedChildrenPermission.FUNC_URL}"/>"><i class="${showedChildrenPermission.FUNC_TITLE_CLASS}"></i> ${showedChildrenPermission.FUNC_NAME}</a>
+								</li>																	                	
+		                    </c:if>
+	                	</c:forEach>
+	                	</ul>
+	                	</c:if>
+	                </li>
+	            </c:forEach>
                 
                 <!--<li>
 	               	<a class="" href="<c:url value="${baseUrl}/cp/users.html"/>"><i class="fa fa-user fa-fw"></i> Quản lý thông tin Users </a>
 				</li>-->
-				<li>
+				<!-- <li>
 	               	<a class="" href=""><i class="fa fa-tasks fa-fw"></i> Quản lý lý lịch khoa học <span class="fa arrow"></span></a>
 	               	<ul class="nav nav-second-level">
 	               		<li>
 	               			<a class="" href="<c:url value="${baseUrl}/researchdeclaration/papers.html"/>"><i class="fa fa-book"></i> Kê khai bài báo </a>
 	               		</li>
 	               	</ul>
-				</li>		                
+				</li>
+				-->		                
                 
                 
                 

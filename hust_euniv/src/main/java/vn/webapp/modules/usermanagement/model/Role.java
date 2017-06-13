@@ -23,7 +23,7 @@ public class Role implements GrantedAuthority,Serializable{
 	private int ROLE_ID;
 	private String ROLE_CODE;
 	
-	@ManyToMany(mappedBy="roles", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="roles", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<User> users = new HashSet<User>();
 		
 	public Set<User> getUsers() {
