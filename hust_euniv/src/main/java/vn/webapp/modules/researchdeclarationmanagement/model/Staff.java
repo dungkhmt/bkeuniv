@@ -14,9 +14,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
+import vn.webapp.modules.usermanagement.model.User;
 @Entity
 @Table(name = "tblstaffs")
 public class Staff implements Serializable{
@@ -33,13 +39,26 @@ public class Staff implements Serializable{
     private String Staff_User_Code;
     private String Staff_Faculty_Code;
     private String Staff_Gender;
-    private String Staff_DateOfBirth;
+    private String Staff_DateOfBirth;		
     private String Staff_AcademicRank;
     
-    @ManyToMany(mappedBy="authors", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	private Set<Papers> papers = new HashSet<Papers>();
+//    @OneToOne(cascade=CascadeType.ALL)
+//    @JoinColumn(name = "Staff_User_Code", referencedColumnName = "User_Code",insertable = false, updatable = false)
+//    private User user;
     
-    public int getStaff_ID() {
+//    @ManyToOne
+//    @JoinColumn(name="Staff_Category_Code", referencedColumnName = "Staff_Category_Code", insertable = false, updatable = false)
+//    public mStaffCategory staffCategory;
+    
+//    @ManyToOne
+//    @JoinColumn(name = "Staff_Department_Code", referencedColumnName = "Department_Code",insertable = false, updatable = false)
+//    private mDepartment department;
+//    
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="Staff_AcademicRank", referencedColumnName = "AcademicRank_Code", insertable=false, updatable = false)
+//    public mAcademicRank academicRank;
+
+	public int getStaff_ID() {
 		return Staff_ID;
 	}
 
@@ -110,6 +129,14 @@ public class Staff implements Serializable{
 	public void setStaff_User_Code(String staff_User_Code) {
 		Staff_User_Code = staff_User_Code;
 	}
+
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	public String getStaff_Faculty_Code() {
 		return Staff_Faculty_Code;
