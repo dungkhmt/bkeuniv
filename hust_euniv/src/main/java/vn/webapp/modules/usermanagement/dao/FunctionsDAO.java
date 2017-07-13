@@ -7,6 +7,8 @@ package vn.webapp.modules.usermanagement.dao;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import vn.webapp.modules.usermanagement.model.Function;
 
 public interface FunctionsDAO {
@@ -28,5 +30,7 @@ public interface FunctionsDAO {
 	public List<Function> loadFunctionsChildHierachyList(String Usercode);
 	
 	public String loadCodeByFunctionUrl(String Func_Url);
+	
+	public List<Function> listFunctionByFields(JSONObject field);
 
 }

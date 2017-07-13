@@ -12,6 +12,7 @@ package vn.webapp.modules.usermanagement.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -78,14 +79,17 @@ public class FunctionServiceImpl implements FunctionService {
 		return functionsDAO.loadCodeByFunctionUrl(Func_Url);
 	}
 
-//	@Override
-//	public Boolean checkAccess(String sUserCode, String sFuncCode) {
-//		mFuncsPermission mFuncsPermission =  funcsPermissionDAO.loadFunctionsPermissionByCodeAndUser(sFuncCode, sUserCode);
-//		if(mFuncsPermission==null) {
-//			return false;
-//		} else {
-//			return true;
-//		}
-//	}
+	@Override
+	public Boolean checkAccess(String sUserCode, String sFuncCode) {
+		JSONObject field = new JSONObject();
+		field.put("users.User_Code", sUserCode);
+		field.put("f.FUNC_CODE", sFuncCode);
+		List<Function> mFuncsPermission = functionsDAO.listFunctionByFields(field);
+		if(mFuncsPermission==null||mFuncsPermission.size()<1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 }

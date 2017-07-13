@@ -56,5 +56,5 @@ public interface FunctionService {
 	public String loadCodeByFunctionUrl(String Func_Url);
 	
 	
-	//public Boolean checkAccess(String sUserCode, String sFuncCode);
+	public Boolean checkAccess(String sUserCode, String sFuncCode);
 }

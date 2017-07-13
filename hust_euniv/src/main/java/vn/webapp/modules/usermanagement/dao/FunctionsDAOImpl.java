@@ -14,18 +14,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vn.webapp.modules.researchdeclarationmanagement.model.Staff;
 import vn.webapp.modules.usermanagement.model.Function;
 import vn.webapp.modules.usermanagement.model.Role;
 import vn.webapp.modules.usermanagement.model.User;
+import vn.webapp.util.Base;
 
 @Repository("functionsDAO")
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class FunctionsDAOImpl implements FunctionsDAO{
+public class FunctionsDAOImpl extends Base implements FunctionsDAO{
 	@Autowired
     private SessionFactory sessionFactory;
 
@@ -164,6 +167,21 @@ public class FunctionsDAOImpl implements FunctionsDAO{
          	logger.error(e.getMessage());
          	return null;
          }
+	}
+	
+	@Override
+	public List<Function> listFunctionByFields(JSONObject field) {
+		try {
+			Session session = getSession(); 
+			Criteria criteria = session.createCriteria(Function.class, "f").createAlias("f.users", "users").setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			criteria = addRestrictions(criteria, field);
+			
+            List<Function> list = criteria.list();
+            return list;
+        } catch (HibernateException e) {
+        	logger.error(e.getMessage());
+        	return null;
+        } 
 	}
 
 }
