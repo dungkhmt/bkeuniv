@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
@@ -52,7 +53,7 @@ public class StaffDAOImpl extends Base implements StaffDAO {
 		try {
 			Session session = getSession(); 
 			Criteria criteria = session.createCriteria(Staff.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			criteria = addRestrictions(criteria, field);
+			addRestrictions(criteria, field, Staff.class);
 			
             List<Staff> list = criteria.list();
             return list;
